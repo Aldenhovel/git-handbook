@@ -1,4 +1,6 @@
-# Git 的相关指令和 Github 使用方法
+# Git 和 Github 使用方法
+
+![welcome](img/welcome.jpg)
 
 ## 0 目录
 
