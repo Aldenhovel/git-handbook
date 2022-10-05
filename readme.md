@@ -22,7 +22,7 @@
 
 ### 1.1 安装（Windows）
 
-在官网https://git-scm.com/download/win下载 Git 的Windows版安装包并安装：
+首先，在官网https://git-scm.com/download/win下载 Git 的Windows版安装包并安装：
 
 ![az1](img/az1.png)
 
