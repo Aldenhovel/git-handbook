@@ -278,7 +278,7 @@ git push -u git-demo-2 main
 
 Git 可以辨认不同的版本，但是它不是逐个文件逐字句地看你的文件，检查有没有修改来判断是否同一版本的，而是采用版本号来判断版本。以`Aldenhovel/git-demo`为例，在 Github 上，你的远程仓库当前版本在这个地方显示：
 
-![bb1](img\bb1.png)
+![bb1](img/bb1.png)
 
 在本地中，可以在`Git Bash`中通过`reflog`指令来检查版本：
 
@@ -286,17 +286,17 @@ Git 可以辨认不同的版本，但是它不是逐个文件逐字句地看你�
 git reflog
 ```
 
-![bb2](img\bb2.png)
+![bb2](img/bb2.png)
 
 [返回目录](#0-目录)
 
-### 6.2 拉取新版本
+### 6.2 拉取最新版本
 
 当远程或者本地的仓库经过`commit`提交后，仓库版本号就会变化，需要我们手动同步，由本地到远程，我们使用`push`方法，而从远程到本地，我们使用`pull`方法。
 
 首先我们要确保远程仓库版本与本地不同，即远程仓库的版本更新，在 Github 端，我们手动改一下`readme.md`并提交，可以看到版本号已经变化：
 
-![bb4](img\bb4.png)
+![bb4](img/bb4.png)
 
 使用这个命令也可以检查：
 
@@ -305,7 +305,7 @@ git remote show git-demo-origin
 # "git-demo-origin" 这个名是之前用 git remote add 添加的，一般情况对应 origin
 ```
 
-![bb3](img\bb3.png)
+![bb3](img/bb3.png)
 
 出现`(local out of date)`说明远程仓库有更新版本，可以使用`pull`拉取，由于是将远程的 main 拉取到本地的 git-demo-origin，我们这样写：
 
@@ -313,7 +313,7 @@ git remote show git-demo-origin
 git pull git-demo-origin main
 ```
 
-![bb5](C:/Users/Aldenhovel/Desktop/markdown/img/bb5.png)
+![bb5](img/bb5.png)
 
 可以看到远程的 main 里面对 `readme.md` 的修改已经被拉取到本地，在本地中打开检查下：
 
