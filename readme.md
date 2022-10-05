@@ -337,5 +337,5 @@ git pull git-demo-origin main
 
 ![thanks](img/thanks.jpg)
 
-`@松鼠` `@小海狮`
+`@松鼠` `@小海狮` `@四方狗` 
 
