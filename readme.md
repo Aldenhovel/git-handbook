@@ -1,8 +1,8 @@
-# Git 的相关指令和 Github 同步方法
+# Git 的相关指令和 Github 使用方法
 
 ## 0 目录
 
-- [Git 的相关指令和 Github 同步方法](#git-的相关指令和-github-同步方法)
+- [Git 的相关指令和 Github 使用方法](#git-的相关指令和-github-使用方法)
   * [0 目录](#0-目录)
   * [1 Git 安装与本地的 Git 仓库管理](#1-git-安装与本地的-git-仓库管理)
     * [1.1 安装（Windows）](#11-安装windows)
