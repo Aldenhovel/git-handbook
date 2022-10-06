@@ -1,10 +1,10 @@
-# Git 和 Github 使用方法
+# Git 和 Github 使用方法（未完结）
 
 ![welcome](img/welcome.jpg)
 
 ## 0 目录
 
-- [Git 的相关指令和 Github 使用方法](#git-的相关指令和-github-使用方法)
+- [Git 的相关指令和 Github 使用方法（未完结）](#git-的相关指令和-github-使用方法未完结)
   * [0 目录](#0-目录)
   * [1 Git 安装与本地的 Git 仓库管理](#1-git-安装与本地的-git-仓库管理)
     * [1.1 安装（Windows）](#11-安装windows)
@@ -23,6 +23,10 @@
     * [6.1 版本比较](#61-版本比较)
     * [6.2 拉取最新版本](#62-拉取最新版本)
     * [6.3 一些坑](#63-一些坑)
+  * [7 管理分支](#7-管理分支)
+    * [7.1 新建分支](#71-新建分支)
+    * [7.2 合并分支](#72-合并分支)
+  * [鸣谢](鸣谢)
 
 ## 1 Git 安装与本地的 Git 仓库管理
 
@@ -30,7 +34,7 @@
 
 首先，在官网https://git-scm.com/download/win下载 Git 的Windows版安装包并安装：
 
-![az1](img/az1.png)
+<img src="img/az1.png" alt="az1" style="zoom:67%;" />
 
 安装过程省略，按默认的来就可以了，完成后菜单里会多出几个 Git 的相关程序，找到 `Git Bash`并打开，进入命令行。由于 Git 最初是在 Linux 上用来做版本控制的工具，并不支持 MacOS，Windows 系统，所以我们使用的`Git Bash`是 Linux 风格移植过来的控制台，与 Windows 的 `Powershell` `CMD` 有不少区别，需要使用 Linux 的相关指令进行操作，**可能需要一点 Linux 基础**。
 
@@ -154,10 +158,11 @@ ssh-keygen -t rsa -C "your-email@example.com"
 
 ![7](img/7.png)
 
-前面使用`git init`会产生默认为`master`的分支，因为这是我们自己的库，先不需要考虑分支冲突的问题，所以我们直接切换到`main`分支：
+前面使用`git init`会产生默认为`master`的分支，因为这是我们自己的库，我们重命名为`main`分支（在 Github 端新建的仓库从 2020 年 10 月开始默认主分支为 `main`，而在 Git 中默认为 `master`，如果想要将本地分支与远程仓库主分支联系则需要手动用`git branch -M <new name>` 将分支重命名让两边一致）：
 
 ```
 git branch -M main
+# P.S git branch -M 命令执行的是强制重命名，想要新建分支，请使用 git checkout -b 命令
 ```
 
 ![12](img/12.png)
@@ -188,7 +193,7 @@ git remote add git-demo-origin git@github.com:Aldenhovel/git-demo.git
 
 我们尝试编辑一个`readme.md`文档并把它推送到 Github，随便写点东西：
 
-![10](img/10.png)
+<img src="img/10.png" alt="10" style="zoom:67%;" />
 
 使用`add`命令可以将文件添加到缓冲区，可以逐个文件添加，也可以在库的主目录下使用`.`将整个库添加：
 
@@ -238,7 +243,7 @@ git remote add git-demo-2 git@github.com:Aldenhovel/git-demo.git
 
 后面就与前面的步骤一样啦，首先我们修改下`readme.md`：
 
-![15](img/15.png)
+<img src="img/15.png" alt="15" style="zoom:67%;" />
 
 然后，使用`add` `commit` `push` 来推送同步：
 
@@ -280,7 +285,7 @@ git push -u git-demo-2 main
 
 Git 可以辨认不同的版本，但是它不是逐个文件逐字句地看你的文件，检查有没有修改来判断是否同一版本的，而是采用版本号来判断版本。以`Aldenhovel/git-demo`为例，在 Github 上，你的远程仓库当前版本在这个地方显示：
 
-![bb1](img/bb1.png)
+<img src="img/bb1.png" alt="bb1" style="zoom:67%;" />
 
 在本地中，可以在`Git Bash`中通过`reflog`指令来检查版本：
 
@@ -298,7 +303,7 @@ git reflog
 
 首先我们要确保远程仓库版本与本地不同，即远程仓库的版本更新，在 Github 端，我们手动改一下`readme.md`并提交，可以看到版本号已经变化：
 
-![bb4](img/bb4.png)
+<img src="img/bb4.png" alt="bb4" style="zoom:67%;" />
 
 使用这个命令也可以检查：
 
@@ -319,7 +324,7 @@ git pull git-demo-origin main
 
 可以看到远程的 main 里面对 `readme.md` 的修改已经被拉取到本地，在本地中打开检查下：
 
-![bb6](img/bb6.png)
+<img src="img/bb6.png" alt="bb6" style="zoom:67%;" />
 
 完成无误！:heavy_check_mark:
 
@@ -333,7 +338,89 @@ git pull git-demo-origin main
 
 [返回目录](#0-目录)
 
-## Thank you！
+## 7 管理分支
+
+Github 提倡的就是代码的开源共享，将仓库开放，人人都可以访问，大家齐心协力一起想办法解决问题（这是不是共产主义？）。因此我们或多或少都会遇到多人协同的开发情境，除了用`push`和`pull`进行本地与远程的代码同步外，多人协同开发最大的问题是合并大家的代码，这就需要在开始时产生分支，等完成后再合并到一起。本章节我们模拟新建一个分支，修改内容，然后再与主分支合并。
+
+[返回目录](#0-目录)
+
+### 7.1 新建分支
+
+以`Aldenhovel/git-demo`库为例，这里我们在`readme.md`里说明了是主分支，并且已经通过`pull`或者`push`方法将本地与远程仓库关联：
+
+<img src="img/fz1.png" alt="fz1" style="zoom:67%;" />
+
+然后我们在本地新建一个`dev`分支：
+
+```
+git checkout -b dev
+# 用 git checkout <name> 来切换分支， -b 为新建并切换
+```
+
+注意这时分支提示已经显示`(dev)`，也可以使用`git branch`看到已经有了`dev`分支。我们将`readme.md`也稍作修改（记得`add`和`commit`）：
+
+![fz2](img/fz2.png)
+
+这时`main`和`dev`分支已经产生了不同，如果需要修改分支文件，需要先用`git checkout <name>`来换到对应的分支再改，因为在不同分支下，文件的内容是不同的，如下：
+
+![fz3](img/fz3.png)
+
+现在我们已经有了两个互相独立的分支，即`main`为主分支、`dev`为开发分支，我们在`dev`上面做自己对应部分的工作，完成后再合并到`main`分支上。
+
+[返回目录](#0-目录)
+
+### 7.2 合并分支
+
+假设现在我们的工作做得差不多了，需要将`dev`分支的内容合并到`main`分支，有两种思路：其一是将自己的`dev`分支在本地与`main`合并，再`push`上去；其二是先将`dev`分支`push`上去，再在 Github 上使用`pull request`合并。这里使用第二种方法：先将`dev`同步到 Github 上：
+
+```
+git push git-demo-origin dev
+# 注意这里最后的参数从 main 换成 dev，即会推送到 dev 分支上
+```
+
+![fz4](img/fz4.png)
+
+在 Github 端，我们看到 `dev` 已经推送上来可以访问了：
+
+<img src="img/fz5.png" alt="fz5" style="zoom:67%;" />
+
+我们切换到 `dev` 分支，可以看到有`pull request`的提示，这是合并代码的入口：
+
+<img src="img/fz6.png" alt="fz6" style="zoom:67%;" />
+
+进去后，可以先进行代码的对比，在这里选择将哪两个分支进行合并，如果没有冲突，会显示`Able to merge`的提示，点击`Create pull request`下一步：
+
+![fz7](img/fz7.png)
+
+在这一步中系统会做最后检查，如无意外，点击`Merge pull request`进行自动合并：
+
+![fz8](img/fz8.png)
+
+完成，系统会提示是否需要删除`dev`分支，可以直接点击删除，也可以回来在`Git Bash`中先把合并后的`main`拉下来，再使用指令将本地和远程的`dev`分支删除：
+
+```
+git checkout main
+# 切换回主分支
+
+git pull git-demo-origin main
+# 同步主分支
+
+git branch --delete dev
+# 删除本地 dev 分支
+
+git push git-demo-origin --delete dev
+# 删除远程 dev 分支
+```
+
+![fz11](img/fz11.png)
+
+此时本地和远程都只剩下合并后的 `main` 分支，大功告成！
+
+[返回目录](#0-目录)
+
+## 鸣谢
+
+
 
 ![thanks](img/thanks.jpg)
 
