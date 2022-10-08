@@ -19,6 +19,8 @@
     + [3.4 同步远程到本地](#34-同步远程到本地)
   * [4 本地库的修改，提交与远程同步](#4-本地库的修改提交与远程同步)
   * [5 克隆远程仓库到本地](#5-克隆远程仓库到本地)
+    * [5.1 克隆仓库](#51-克隆仓库)
+    * [5.2 选择分支](#52选择分支)
   * [6 拉取最新版本的远程仓库](#6-拉取最新版本的远程仓库)
     * [6.1 版本比较](#61-版本比较)
     * [6.2 拉取最新版本](#62-拉取最新版本)
@@ -179,11 +181,11 @@ git branch -M main
 git remote add git-demo-origin git@github.com:Aldenhovel/git-demo.git
 ```
 
-将他关联过来，这里的`git-demo-origin`是源仓库名，一般远程库默认叫`origin`，也可以改别的名字比如`xx-origin`（我的习惯）：
+将他关联过来，这里的`git-demo-origin`是给远程仓库起的名，一般远程库默认叫`origin`，也可以改别的名字比如`xx-origin`（我的习惯）：
 
 ![8](img/8.png)
 
-现在本地库和远程库就产生了关联。
+这句命令的意思是将 `git@github.com:Aldenhovel/git-demo.git` 这个远程仓库记录为 `git-demo-origin` ，这样下次推送、同步就可以用简写名代替了现在本地库和远程库就产生了关联。
 
 [返回目录](#0-目录)
 
@@ -229,12 +231,15 @@ git push -u git-demo-origin main
 
 ## 5 克隆远程仓库到本地
 
+### 5.1 克隆仓库
+
 前面的是从0开始先建立 Github 仓库，再关联本地，最后在本地编辑项目并同步到本地。多数时候我们不需要从0开始建立仓库，而是在新的设备上将 Github 上的库拉下来开始上手干活。这里我们假设在本地建立一个`git-demo-2`仓库，并同步远程`Aldenhovel/git-demo`仓库。
 
 使用`git clone`指令将远程仓库克隆到本地，因为我们现在已经有了一个`git-demo`本地库了，需要重新指定本地库名以防止冲突：
 
 ```
 git clone git@github.com:Aldenhovel/git-demo.git git-demo-2
+# git clone <远程仓库地址> <本地目录>
 ```
 
 ![13](img/13.png)
@@ -273,7 +278,9 @@ git push -u git-demo-2 main
 
 [返回目录](#0-目录)
 
+### 5.2 选择分支 
 
+请参考 [跳转到更新](#id_666) 
 
 ## 6 拉取最新版本的远程仓库
 
@@ -482,6 +489,38 @@ git reset --hard ed21741
 
 [返回目录](#0-目录)
 
+## 9 .gitignore
+
+`.gitignore` 文件会指示每次 `commit` 时忽略哪些文件，一般是某些运行缓存、临时图片、或者日志，这些我们只在本地会用到，因此不需要同步到仓库里。
+
+仓库初始化时是不包括 `.gitignore` 文件的，需要自己手动添加，这里我们依然使用 `Aldenhovel/git-demo` 仓库来演示，首先新建 `.gitignore` 文件，以及模拟一个 `temp.log` 日志文件：
+
+![ig1](img/ig1.png)
+
+由于还没有编写 `.gitignore` 规则，如果此时直接 `add, commit & push` ，临时日志文件 `temp.log` 也会被同步到仓库里面，因此我们在 `.gitignore` 中加入规则以过滤 `temp.log` ：
+
+![ig2](img/ig2.png)
+
+然后我们`add, commit & push`，可以看到 `.gitignore` 文件已经被正确同步到 Github ，而 `temp.log` 则按照规则被过滤，没有加入仓库：
+
+![ig3](img/ig3.png)
+
+![ig4](img/ig4.png)
+
+`.gitignore` 规则的编写方式可以参考以下示例：
+
+```
+temp.log		忽略 temp.log 文件
+! temp.log		不忽略 temp.log 文件
+temp/			忽略 temp 文件夹
+/temp			忽略根目录下的 temp 文件
+temp/*			忽略 temp 文件夹内的所有内容（但文件夹本身不忽略）
+temp/*.log		忽略 temp 文件夹内直接包含的所有 .log 后缀的文件（temp/xx/xx.log不受影响）
+temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀的文件（temp/xx/xx.log也会忽略）
+```
+
+[返回目录](#0-目录)
+
 # Appendix 附录
 
 ## A.1 相关资料补充
@@ -502,13 +541,27 @@ git reset --hard ed21741
 
    可以新建本地和对应远程仓库的关联，以方便后续开发的`fetch / pull` `push` 操作。
 
-   *参考：https://www.php.cn/tool/git/487235.html*
+   *参考文献：https://www.php.cn/tool/git/487235.html*
 
    [返回目录](#0-目录)
 
-   
+2. **克隆某一仓库某一分支**<span id='id_666'/>
 
-   
+   在使用 `git clone xxx.git` 时，如果没有其他参数，是会把整个远程仓库克隆过来的，但是在本地只会创建出默认的 `master` 分支，如果需要获取仓库的某一分支，需要先使用：
+
+   ```
+   git branch -a
+   ```
+
+   查询可用的分支，再使用：
+
+   ```
+   $ git checkout -b <分支名> origin/<分支名>
+   ```
+
+   创建并加载此分支。
+
+
 
 # 鸣谢
 
