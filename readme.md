@@ -628,7 +628,34 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
 3. **stash指令**<span id='stash'/>
 
+   设想这样一种工作情景，你在 `dev` 分支上开发新特性，结果突然接到 `main` 分支有一个问题需要立即解决，最好的做法是先将现在 `dev` 手头的进度（包括工作目录和暂存区）找个地方保存起来，处理完 `main` 再恢复出来继续做。Git 指令中的`stash` 指令可以基于栈来实现此想法：
 
+   ```
+   git stash 
+   # 将工作目录和暂存区保存到栈中
+   
+   git stash save <"name">
+   # 保存并起名，与 git pop <"name"> 对应
+   
+   git stash list
+   # 展示栈中的保存列表
+   
+   git stash pop
+   # 弹出栈顶的保存状态
+   
+   git stash pop <"name">
+   # 弹出某版本工作状态
+   
+   git stash apply
+   # 与 pop 相似，但不会将拿出的工作状态从栈中消除
+   
+   git stash clear
+   # 清除之前保存的所有工作状态（慎用！）
+   ```
+
+   *参考文献：https://blog.csdn.net/csdnlijingran/article/details/96425712*
+
+   [返回目录](#0-目录)
 
 # 鸣谢
 
