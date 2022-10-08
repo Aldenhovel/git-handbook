@@ -179,7 +179,7 @@ git branch -M main
 git remote add git-demo-origin git@github.com:Aldenhovel/git-demo.git
 ```
 
-将他关联过来，这里的`git-demo-origin`是仓库名，一般远程库约定成俗叫`origin`，也可以改别的名字比如`xx-origin`（我的习惯）：
+将他关联过来，这里的`git-demo-origin`是源仓库名，一般远程库默认叫`origin`，也可以改别的名字比如`xx-origin`（我的习惯）：
 
 ![8](img/8.png)
 
@@ -213,7 +213,7 @@ git add .
 git commit -m "version 0.1"
 ```
 
-最后使用`push`命令进行远程同步：
+最后使用`push`命令将本地 `main` 远程同步到远程仓库 `git-demo-origin`：
 
 ```
 git push -u git-demo-origin main
@@ -320,7 +320,7 @@ git remote show git-demo-origin
 
 ![bb3](img/bb3.png)
 
-出现`(local out of date)`说明远程仓库有更新版本，可以使用`pull`拉取，由于是将远程的 main 拉取到本地的 git-demo-origin，我们这样写：
+出现`(local out of date)`说明远程仓库有更新版本，可以使用`pull`拉取，由于从远程的 `git-demo-origin` 拉取到本地的 `main`，我们这样写：
 
 ```
 git pull git-demo-origin main
@@ -328,7 +328,7 @@ git pull git-demo-origin main
 
 ![bb5](img/bb5.png)
 
-可以看到远程的 main 里面对 `readme.md` 的修改已经被拉取到本地，在本地中打开检查下：
+可以看到远程的 `main` 分支里面对 `readme.md` 的修改已经被拉取到本地，在本地中打开检查下：
 
 <img src="img/bb6.png" alt="bb6" style="zoom:67%;" />
 
