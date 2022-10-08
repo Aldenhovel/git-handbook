@@ -182,7 +182,7 @@ git branch -M main
 git remote add git-demo-origin git@github.com:Aldenhovel/git-demo.git
 ```
 
-将他关联过来，这里的`git-demo-origin`是给远程仓库起的名，一般远程库默认叫`origin`，也可以改别的名字比如`xx-origin`（我的习惯）：
+将他关联过来，这里的`git-demo-origin`是给远程仓库起的名，一般远程库默认叫`origin`[(什么是origin)](#origin-meaning)<span id='r-origin-meaning'>，也可以改别的名字比如`xx-origin`（我的习惯）：
 
 ![8](img/8.png)
 
@@ -281,7 +281,7 @@ git push -u git-demo-2 main
 
 ### 5.2 选择分支 
 
-请参考 [克隆某一仓库某一分支](#a_1_2) 。
+请参考 [克隆某一仓库某一分支](#clone-branch) <span id='r-clone-branch'>。
 
 [返回目录](#0-目录)
 
@@ -548,7 +548,9 @@ git reset --hard HEAD~3		回退3个版本
    git commit -m "......"
    ```
 
-   这样就可以啦！关于 `stash` 指令的说明，请看这里[stash指令的作用](#stash)。
+   这样就可以啦！关于 `stash` 指令的说明，请看这里[stash指令的作用](#stash)<span id='r-stash'>。
+
+   [返回目录](#0-目录)
 
 ## 9 .gitignore
 
@@ -586,7 +588,7 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
 ## A.1 相关资料补充
 
-1. **`origin` 的含义**
+1. **`origin` 的含义**<span id='origin-meaning'>
 
    你的代码库 (repository) 可以存放在你的电脑里，同时你也可以把代码库托管到 Github 的服务器上。在默认情况下，`origin`指向的就是你本地的代码库托管在Github上的版本。使用：
 
@@ -604,9 +606,9 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    *参考文献：https://www.php.cn/tool/git/487235.html*
 
-   [返回目录](#0-目录)
+   [返回目录](#0-目录)	[返回章节 4](#r-origin-meaning)
 
-2. **克隆某一仓库某一分支**<span id='a_1_2'/>
+2. **克隆某一仓库某一分支**<span id='clone-branch'/>
 
    在使用 `git clone xxx.git` 时，如果没有其他参数，是会把整个远程仓库克隆过来的，但是在本地只会创建出默认的 `master` 分支，如果需要获取仓库的某一分支，需要先使用：
 
@@ -624,7 +626,7 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    *参考文献：https://www.cnblogs.com/FengZeng666/p/16500352.html*
 
-   [返回目录](#0-目录)
+   [返回目录](#0-目录)	[返回章节 5.2](#r-clone-branch)
 
 3. **stash指令**<span id='stash'/>
 
@@ -655,7 +657,7 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    *参考文献：https://blog.csdn.net/csdnlijingran/article/details/96425712*
 
-   [返回目录](#0-目录)
+   [返回目录](#0-目录)	[返回章节 8.4](#r-stash)
 
 # 鸣谢
 
