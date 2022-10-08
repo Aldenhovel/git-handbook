@@ -32,6 +32,7 @@
     * [8.1 hard reset](#81-hard-reset)
     * [8.2 soft reset](#82-soft-reset)
     * [8.3 对比 hard 和 soft reset](#83-对比-hard-和-soft-reset)
+    * [8.4 情景模拟](#84-情景模拟)
 - [Appendix 附录](#appendix-附录)
   - [A.1 相关资料补充](#a1-相关资料补充)
 - [鸣谢](#鸣谢)
@@ -489,7 +490,65 @@ git reset --hard ed21741
 
 再举个栗子，有时我们 `commit` 错了对象，需要重新 `commit` ，不需要更改内容只要将版本号回退重新 `commit` 即可，这时我们用 `soft reset`。然鹅有时我们的仓库代码出现了比较严重的漏洞，需要回退到安全版本，就需要 `hard reset` 。
 
+除了使用版本号指定回退位置，也可以使用 `^` 或者 `~` 来表示以当前版本的相对位置，例如：
+
+```
+git reset --hard HEAD^		回退1个版本
+git reset --hard HEAD^^		回退2个版本
+git reset --hard HEAD^^^	回退3个版本
+......						
+
+git reset --hard HEAD~		回退1个版本
+git reset --hard HEAD~2		回退2个版本
+git reset --hard HEAD~3		回退3个版本
+......
+```
+
 [返回目录](#0-目录)
+
+### 8.4 情景模拟
+
+1. **不小心把要创建新分支 `dev` 的内容提交到了 `main` 上：**
+
+   首先以当前 `main` 分支新建一个 `dev` 分支：
+
+   ```
+   git branch dev
+   ```
+
+   然后回退 `main` 到上一版本：
+
+   ```
+   git reset -- hard HEAD~
+   ```
+
+   最后切换回 `newdev` 分支即可：
+
+   ```
+   git checkout dev
+   ```
+
+   (注意此方法只针对你自己的本地仓库可行，线上随便乱回退会被队友拿来祭天吧？)
+
+2. **不小心把要提交到 `dev` 的内容提交到了 `main` 上：**
+
+   这时我们先软回退到 `main` 的上个版本，然后使用`stash` 将未提交内容转移到堆栈：
+
+   ```
+   git reset --soft HEAD~
+   git stash
+   ```
+
+   然后切换回对的分支，使用 `pop` 弹出堆栈内容，然后 `add & commit` ：
+
+   ```
+   git checkout dev
+   git stash pop
+   git add .
+   git commit -m "......"
+   ```
+
+   这样就可以啦！关于 `stash` 指令的说明，请看这里[stash指令的作用](#stash)。
 
 ## 9 .gitignore
 
@@ -566,6 +625,8 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
    *参考文献：https://www.cnblogs.com/FengZeng666/p/16500352.html*
 
    [返回目录](#0-目录)
+
+3. **stash指令**<span id='stash'/>
 
 
 
