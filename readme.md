@@ -27,7 +27,8 @@
     * [6.3 提醒事项](#63-提醒事项)
   * [7 管理分支](#7-管理分支)
     * [7.1 新建分支](#71-新建分支)
-    * [7.2 合并分支](#72-合并分支)
+    * [7.2 合并分支Github端](#72-合并分支github端)
+    * [7.3 合并分支GitBash端](#73-合并分支gitbash端)
   * [8 版本回退](#8-版本回退)
     * [8.1 hard reset](#81-hard-reset)
     * [8.2 soft reset](#82-soft-reset)
@@ -385,7 +386,7 @@ git checkout -b dev
 
 [返回目录](#0-目录)
 
-### 7.2 合并分支
+### 7.2 合并分支Github端
 
 假设现在我们的工作做得差不多了，需要将`dev`分支的内容合并到`main`分支，有两种思路：其一是将自己的`dev`分支在本地与`main`合并，再`push`上去；其二是先将`dev`分支`push`上去，再在 Github 上使用`pull request`合并。这里使用第二种方法：先将`dev`同步到 Github 上：
 
@@ -431,6 +432,26 @@ git push git-demo-origin --delete dev
 ![fz11](img/fz11.png)
 
 此时本地和远程都只剩下合并后的 `main` 分支，大功告成！
+
+[返回目录](#0-目录)
+
+### 7.3 合并分支GitBash端
+
+补充前面提到的第一种做法：将 `dev` 在本地与 `main` 合并后再 `push` 到远程仓库。首先在 `main` 分支拉取一下最新进度，然后使用 `merge` 命令将 `dev` 与 `main` 合并[（关于合并参数）](#ff-and-noff)<span id='r-ff-and-noff'>：
+
+![bb7](img/bb7.png)
+
+没有报错，此时在本地的 `main` 已经成功合并了`dev` 分支了，然后我们需要 `add, commit & push` 将 `main` 推送到远程仓库并检查，发现 `main` 已经成功合并了 `dev` 的修改内容：
+
+![bb8](img/bb8.png)
+
+![bb9](img/bb9.png)
+
+最后我们选择性地删除本地 `dev` 分支（由于 `dev` 分支从头到尾都在本地新建、合并、修改，因此远程仓库里并没有 `dev` 分支）:
+
+```
+git branch --delete dev
+```
 
 [返回目录](#0-目录)
 
@@ -673,7 +694,7 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    [返回目录](#0-目录)	[返回章节 8.3](#r-what-is-head)
 
-6. **合并分支时，`fast-forward` 和 `no-ff` 的不同**
+6. **合并分支时，`fast-forward` 和 `no-ff` 的不同**<span id=ff-and-noff>
 
    `fast-forward` 会直接将 `HEAD` 从主分支移动到开发分支的最新提交点上，这样不需要产生新的 `commit`，当然这种合并方式是有条件的，就是你的主分支上没有新的提交点（就可以把你的开发分支直接作为主分支）。
 
@@ -683,7 +704,7 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    *参考文献：https://www.cnblogs.com/michael-xiang/p/13179837.html*
 
-   [返回目录](#0-目录)
+   [返回目录](#0-目录)	[返回章节 7.3](#r-ff-and-noff)
 
    
 
