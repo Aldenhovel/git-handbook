@@ -437,7 +437,7 @@ git push git-demo-origin --delete dev
 
 ### 7.3 合并分支GitBash端
 
-补充前面提到的第一种做法：将 `dev` 在本地与 `main` 合并后再 `push` 到远程仓库。首先在 `main` 分支拉取一下最新进度，然后使用 `merge` 命令将 `dev` 与 `main` 合并[（关于合并参数）](#ff-and-noff)<span id='r-ff-and-noff'>：
+补充前面提到的第一种做法：将 `dev` 在本地与 `main` 合并后再 `push` 到远程仓库。首先在 `main` 分支拉取一下最新进度，然后使用 `merge` 或者 `rebase` 命令将 `dev` 与 `main` 合并[（关于合并参数）](#ff-and-noff)<span id='r-ff-and-noff'> [（关于merge和rebase）](#merge-and-rebase)<span id='r-merge-and-rebase'>：
 
 ![bb7](img/bb7.png)
 
@@ -706,7 +706,13 @@ temp/**/*.log	忽略 temp 文件夹内直接及间接包含的所有 .log 后缀
 
    [返回目录](#0-目录)	[返回章节 7.3](#r-ff-and-noff)
 
-   
+7. **关于merge指令和rebase指令**<span id='merge-and-rebase'>
+
+   相比于 `merge` 能够合并两个分支，`rebase` 则是将一个分支的基直接转移到另一分支对应位置上，从而保留此分支的历史提交记录，然而代价是无法像 `merge` 一样提交记录由时间串行，因此在实际工作中可能被禁用，更详细的解释请查阅参考文献。
+
+   *参考文献：https://www.cnblogs.com/michael-xiang/p/13179837.html*
+
+   [返回目录](#0-目录)	[返回章节 7.3](#r-merge-and rebase)
 
 # 鸣谢
 
