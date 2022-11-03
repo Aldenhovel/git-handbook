@@ -1,4 +1,4 @@
-# Git 和 Github 使用方法（未完结）
+# Git 和 Github 使用方法（基本完结）
 
 ![welcome](img/welcome.jpg)
 
